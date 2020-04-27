@@ -24,9 +24,16 @@ echo "Enter root password"
 passwd root
 echo "Enter new user name"
 read user1
-useradd -m -G wheel -s /bin/bash $user1
+useradd -m -s /bin/bash $user1
 echo "Enter password"
 passwd $user1
+groupadd -r autologin
+gpasswd -a $user1 autologin
+
+#Add to sudoers
+sed -i '80s/.*/'$user1' ALL=(ALL) ALL/' /etc/sudoers
+#Add to autologin
+sed -i '120s/.*/autologin-user='$user1'/' /etc/lightdm/lightdm.conf
 
 git clone https://github.com/bobby3605/dotfiles
 su $user1 dotfiles/laptop/install.sh
