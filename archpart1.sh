@@ -9,8 +9,8 @@ echo -e "g\nn\n\n\n+512M\nn\n\n\n\nw\n" | fdisk $disk
 echo -e "t\n1\n1\nw\n" | fdisk $disk
 mkfs.fat -F32 "$disk""1"
 mkfs.ext4 "$disk""2"
-mount "$disk""1" /mnt/boot
 mount "$disk""2" /mnt
+mount "$disk""1" /mnt/boot
 cp mirrorlist /etc/pacman.d/mirrorlist
 pacstrap /mnt base linux linux-firmware
 genfstab -U /mnt >> /mnt/etc/fstab
