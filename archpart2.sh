@@ -33,6 +33,7 @@ gpasswd -a $user1 autologin
 #Add to sudoers
 sed -i '80s/.*/'$user1' ALL=(ALL) ALL/' /etc/sudoers
 
+cd /home/$user1
 git clone https://github.com/bobby3605/dotfiles
 su $user1 dotfiles/laptop/install.sh
 #
