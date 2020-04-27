@@ -5,7 +5,8 @@ read disk
 umount "$disk""1"
 umount "$disk""2"
 # Format partitions, \n for every enter
-echo -e "g\nn\n1\n\n+512M\nt\n\1\nn\n\n\nw\n" | fdisk $disk
+echo -e "g\nn\n\n\n+512M\nn\n\n\nw\n" | fdisk $disk
+echo -e "t\n1\n1\nw\n" | fdisk $disk
 mkfs.fat -F32 "$disk""1"
 mkfs.ext4 "$disk""2"
 mount "$disk""2" /mnt
